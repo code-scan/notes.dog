@@ -14,6 +14,9 @@ https://notes.dog/demo.php
 # curl提交
 curl -XPOST https://notes.dog/dog  --data 'text=dog'
 
+
+# 搭建
+./notes -l 0.0.0.0 -p 80
 ```
 
 

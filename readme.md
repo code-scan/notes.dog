@@ -16,6 +16,7 @@ curl -XPOST https://notes.dog/dog  --data 'text=dog'
 
 
 # 搭建
+mkdir temp/
 ./notes -l 0.0.0.0 -p 80
 ```
 

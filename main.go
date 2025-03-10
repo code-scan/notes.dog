@@ -42,6 +42,13 @@ func getContent(idmd5 string) string {
 	}
 }
 
+func getSuffix(id string) string {
+	if strings.HasSuffix(id, ".html") || strings.HasSuffix(id, ".htm") {
+		return "text/html;charset=utf-8"
+	}
+	return ""
+}
+
 func main() {
 	r := gin.Default()
 	r.Any("/", func(ctx *gin.Context) {
@@ -51,6 +58,11 @@ func main() {
 		id := ctx.Param("ID")
 		idmd5 := md5sum(id)
 		content := getContent(idmd5)
+		if t := getSuffix(id); t != "" {
+			ctx.Header("content-type", t)
+			ctx.String(200, content)
+			return
+		}
 		index := string(static.Index)
 		index = strings.ReplaceAll(index, "{{Title_Notes.Dog}}", id)
 		index = strings.ReplaceAll(index, "{{Content_Notes.Dog}}", content)
